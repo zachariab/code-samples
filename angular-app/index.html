@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="macsocial" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="macsocial" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="macsocial" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="macsocial" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mac Social Admin</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="//use.typekit.net/hco6anl.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <!-- Bootstrap core CSS -->
+        <link href="/mac-bootstrap/dist/css/mac-bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet">
+        <link href="bower_components/bootstrap-additions/dist/bootstrap-additions.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/socialhub.css" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="css/app.css" type="text/css" media="screen, projection" />
+
+        <!--[if gte IE 9]>
+          <style type="text/css">
+            .gradient {
+               filter: none;
+            }
+          </style>
+        <![endif]-->
+
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+
+<div id="body" class="container-fluid">
+  <header>
+        <nav class="sectionHeader gradient clearfix">
+          <div class="macalesterLogo">
+              <a href="http://www.macalester.edu" title="Go to Macalester College"></a>
+            </div>
+            <h1>Mac Social</h1>
+            <div class="sectionNavigation">
+                <ul>
+                    <li><a href="#/posts">Posts</a></li>
+                    <li><a href="#/feeds">Feeds</a></li>
+                    <li><a href="?logout">Logout</a></li>
+                </ul>
+            </div>
+            
+            <div class="clear"></div>
+        </nav>
+    </header>
+
+
+<!-- Start Main Content -->
+
+  <div ng-view></div>
+</cf_layout>
+
+<!-- End Main Content --> 
+</div>
+
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <script src="/mac-bootstrap/dist/js/mac-bootstrap.min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/isotope/dist/isotope.pkgd.min.js"></script>
+  <script src="bower_components/angular-isotope/dist/angular-isotope.min.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
+  <script src="javascript/app.js"></script>
+  <script src="javascript/services.js"></script>
+  <script src="javascript/controllers.js"></script>
+  <script src="javascript/filters.js"></script>
+  <script src="javascript/directives.js"></script>
+</body>
+</html>

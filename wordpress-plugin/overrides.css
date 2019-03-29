@@ -1,0 +1,123 @@
+/* Layout Styles
+
+	Assume screen will always be 1080p in landscape (1920×1080) or
+	portrait (1080x1920) orientation.
+
+	-- .heading-block
+		-- .heading-logo-block
+		-- .heading-clock-block
+	-- .slide-block (.with-feeds/.no-feeds, .with-ticker/.no-ticker)
+	-- .feeds-block
+		-- .feeds-main-block
+			-- .feeds-feed-block (may be two of these, if parent has .two-feeds)
+	-- .ticker-block
+
+*/
+.heading-block, .slide-block, .feeds-block, .ticker-block {
+	overflow: hidden !important;
+}
+.heading-block {
+	height: 7.8125vh; /* vh is "viewport height" in percentage */
+	background-color: #00529B;
+}
+.heading-block .heading-logo-block {
+	float: left;
+	max-width: 30%;
+	height: 100%;
+	padding: 1em;
+}
+.heading-block .heading-clock-block {
+	float: right;
+	width: 70%;
+	padding: 1em;
+}
+.slide-block {
+	height: 92.1875vh;
+}
+.slide-block.with-feeds {
+	height: 8vh;
+}
+.slide-block.with-ticker {
+	height: 10vh;
+}
+.feeds-block {
+	height: 52.734vh;
+}
+.ticker-block {
+	height: 7.8125vh;
+}
+.slide-block.with-ticker.with-feeds {
+	height: 42.1875vh;
+}
+.feeds-feed-block {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+/* The following styles will apply to landscape orientation */
+@media all and (min-width: 1450px) {
+	.heading-block {
+		height: 13.888vh;
+	}
+	.slide-block {
+		height: 86.112vh;
+	}
+}
+.feeds-main-block, .textwidget, .signage-events, .feeds-feed-block, .feeds-block {
+	background-color: #EA8106 !important;
+}
+.feeds-feed-block{
+	border-right: 1px solid #333333;
+}
+
+/* Module Styles */
+
+li.post-box {
+	min-height: 100% !important;
+}
+li.post-box.image {
+	position: relative;
+	text-indent: -9999px;
+}
+li.post-box.image img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.heading-block div.logo img {
+	height: 100%;
+}
+
+.clock #Date,  .clock ul {
+	/* I can't figure out why this needs important to override*/
+	display: inline-block !important;
+	height: 100% !important;
+	line-height: 100px !important;
+	width: auto !important;
+	float: right !important;
+	margin: 0 !important;
+	font-size: 5rem !important;
+	padding-right: 4rem !important;
+}
+
+.slide-container {
+	height: 100%;
+}
+.slide-container > ul {
+	height: 100%;
+}
+.orbit-container {
+	height: 100%;
+}
+h2 {
+	margin-top: 0 !important;
+	padding: .5rem .2rem !important;
+}
+a{
+	color: #333333 !important;
+}
+

@@ -1,0 +1,21 @@
+.js {
+	#sideNav {
+		width: 25em;
+		right: -25em;
+		left: auto;
+	}
+}
+.nav-open .doc-body {
+	left: auto;
+	right: 25em;
+}
+
+.csstransitions {
+	.doc-body {
+		@include transform (translate3d(0, 0, 0)); 
+	}
+	.nav-open .doc-body {
+		left: auto;
+		@include transform (translate3d(-25em, 0, 0)); 
+	}
+}

@@ -1,0 +1,16 @@
+{{#posts}}
+<div class="content"><table bgcolor="">
+<tr>
+{{#POST_PROPERTIES.photo_url}}
+<td width="35%" style="vertical-align: top;"><img src="{{POST_PROPERTIES.photo_url}}"/>&nbsp;</td>
+<td width="3%">&nbsp;</td>
+{{/POST_PROPERTIES.photo_url}}
+<td style="vertical-align: top;">
+<h4 style="text-transform: capitalize">{{SERVICE}} post from {{POST_PROPERTIES.user_full_name}}</h4>
+{{#POST_PROPERTIES.user_screen_name}}<h4><small>@{{POST_PROPERTIES.user_screen_name}}</small></h4>{{/POST_PROPERTIES.user_screen_name}}
+<p class="">{{POST_PROPERTIES.text}}</p>
+<p><a class="btn" style="background-color: #93a72f" href="{{adminURL}}#/posts/pending/approve/{{POST_ID}}">Approve</a><a class="btn" style="background-color: #c74242" href="{{adminURL}}#/posts/pending/remove/{{POST_ID}}">Remove</a><a class="btn" href="{{POST_URL}}">View Original</a></p>
+</td>
+</tr>
+</table></div>
+{{/posts}}

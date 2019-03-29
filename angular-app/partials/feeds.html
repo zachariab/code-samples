@@ -1,0 +1,106 @@
+<div class="boxed-text">
+
+<p class="pull-right">
+	<small>
+		<a ng-click="toggleDeleted()">
+		<span ng-show="!showDeleted"><span class="glyphicon glyphicon-trash"></span> Deleted Feeds</span>
+		<span ng-show="showDeleted"><span class="glyphicon glyphicon-chevron-left"></span> Back to Live Feeds</span>
+		</a>
+	</small>
+</p>
+
+<h2>Feeds</h2>
+
+<div class="jumbotron" ng-show="showDeleted && feeds.length==0">
+  <h1>Empty List</h1>
+  <p>There are no deleted feeds at this time.</p>
+  <p><a ng-click="toggleDeleted()" class="btn btn-primary btn-lg" role="button">View the Active Feeds</a></p>
+</div>
+
+<ul class="list-group feed-list" ui-sortable="sortableOptions" ng-model="feeds">
+	<li style="cursor: move" class="list-group-item" ng-repeat="feed in feeds">
+		<p class="pull-left" style="margin-right: 16px"><img ng-src="/mac-social-hub/admin/images/{{feed.SERVICE}}.svg" alt="Twitter" /> </p>
+		<div class="pull-right" style="margin-left: 16px">
+			<button ng-show="feed.DELETED" ng-click="undeleteFeed(feed)" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Put Back</button>
+			<div class="btn-group" ng-show="!(feed.editing || feed.DELETED)">
+				<button ng-click="beginEdit(feed)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a ng-click="deleteFeed(feed)">Delete Feed</a></li>
+				</ul>
+			</div>
+			<button ng-show="feed.editing" ng-click="cancelEdit(feed)" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+		</div>
+		<p>{{feed.ORDER}}. <span ng-bind-html="feed | summarizeFeedInfo" /></p>
+		<div style="cursor: default" ng-show="feed.editing" class="editForm am-fade" ng-animate="am-fade">	
+			<form role="form" name="editForm" ng-submit="editForm.$valid && saveEdit(feed)">
+				<div class="form-group">
+					<label>Network</label>
+					<select required class="form-control" ng-model="feed.SERVICE" ng-options="service.value as service.label for service in serviceValues" />
+				</div>
+				<div class="form-group">
+					<label>Query Type</label>
+					<select required class="form-control" ng-model="feed.QUERY_TYPE" ng-options="service.value as service.label for service in queryTypeValues" />
+				</div>
+				<div class="form-group">
+					<label>Query Term</label>
+					<input required class="form-control" ng-model="feed.QUERY_TERM" />
+				</div>
+				<div class="form-group">
+					<label>Default Status</label>
+					<select required class="form-control" ng-model="feed.DEFAULT_STATUS" ng-options="service.value as service.label for service in statusValues" />
+				</div>
+				<div class="form-group">
+					<label>Order</label>
+					<input required class="form-control" ng-model="feed.ORDER" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" ng-disabled="editForm.$invalid || editForm.$pristine"><span class="glyphicon glyphicon-ok"></span> Save</button>
+				</div>
+			</form>
+		</div>
+	</li>
+</ul>
+
+<p>
+	<a ng-show="!addingNew" ng-click="beginNew()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add a Feed</a>
+	<a ng-show="addingNew" ng-click="cancelNew()" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Cancel</a>
+</p>
+
+
+<div class="animate-show" ng-show="addingNew">	
+	<div class="panel-body">
+	<form role="form" class="newForm" novalidate name="newFeedForm" novalidate ng-submit="newFeedForm.$valid && saveNew(newFeed)">
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.network.$invalid}">
+			<label>Network</label>
+			<select required class="form-control" name="network" ng-model="newFeed.SERVICE" ng-options="service.value as service.label for service in serviceValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.querytype.$invalid}">
+			<label>Query Type</label>
+			<select required class="form-control" name="querytype" ng-model="newFeed.QUERY_TYPE" ng-options="service.value as service.label for service in queryTypeValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.queryterm.$invalid}">
+			<label>Query Term</label>
+			<input required class="form-control" name="queryterm" ng-model="newFeed.QUERY_TERM" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.defaultstatus.$invalid}">
+			<label>Default Status</label>
+			<select required class="form-control" name="defaultstatus" ng-model="newFeed.DEFAULT_STATUS" ng-options="service.value as service.label for service in statusValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.order.$invalid}">
+			<label>Order</label>
+			<input required class="form-control" name="order" ng-model="newFeed.ORDER" />
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" ng-disabled="newFeedForm.$invalid"><span class="glyphicon glyphicon-ok"></span> Save</button>
+		</div>
+	</form>
+</div>
+</div>
+
+
+
+</div>

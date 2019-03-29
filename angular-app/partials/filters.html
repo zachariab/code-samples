@@ -1,0 +1,83 @@
+<div class="boxed-text">
+<h2>Filters</h2>
+
+<p>[Show filter types here]</p>
+
+<table class="table table-striped feed-list">
+<tr ng-repeat="filter in filters">
+	<td>
+		<p>{{filter.order}}. {{filter.filtertype}}</p>
+		<!--
+		<div ng-show="feed.editing" class="editForm am-fade" ng-animate="am-fade">	
+			<form role="form" name="editForm" ng-submit="editForm.$valid && saveEdit(feed)">
+				<div class="form-group">
+					<label>Network</label>
+					<select required class="form-control" ng-model="feed.SERVICE" ng-options="service.value as service.label for service in serviceValues" />
+				</div>
+				<div class="form-group">
+					<label>Query Type</label>
+					<select required class="form-control" ng-model="feed.QUERY_TYPE" ng-options="service.value as service.label for service in queryTypeValues" />
+				</div>
+				<div class="form-group">
+					<label>Query Term</label>
+					<input required class="form-control" ng-model="feed.QUERY_TERM" />
+				</div>
+				<div class="form-group">
+					<label>Default Status</label>
+					<select required class="form-control" ng-model="feed.DEFAULT_STATUS" ng-options="service.value as service.label for service in statusValues" />
+				</div>
+				<div class="form-group">
+					<label>Order</label>
+					<input required class="form-control" ng-model="feed.ORDER" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" ng-disabled="editForm.$invalid || editForm.$pristine"><span class="glyphicon glyphicon-ok"></span> Save</button>
+				</div>
+			</form>
+		</div>-->
+	</td>
+	<td style="position: relative">
+		<button ng-show="!filter.editing" ng-click="beginEdit(filter)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+		<button ng-show="filter.editing" ng-click="cancelEdit(filter)" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+	</td>
+</tr>
+</table>
+
+<p>
+	<a ng-show="!addingNew" ng-click="beginNew()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add a Filter</a>
+	<a ng-show="addingNew" ng-click="cancelNew()" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Cancel</a>
+</p>
+
+
+<div class="animate-show" ng-show="addingNew">	
+	<div class="panel-body">
+<!--	<form role="form" class="newForm" novalidate name="newFeedForm" novalidate ng-submit="newFeedForm.$valid && saveNew(newFeed)">
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.network.$invalid}">
+			<label>Network</label>
+			<select required class="form-control" name="network" ng-model="newFeed.SERVICE" ng-options="service.value as service.label for service in serviceValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.querytype.$invalid}">
+			<label>Query Type</label>
+			<select required class="form-control" name="querytype" ng-model="newFeed.QUERY_TYPE" ng-options="service.value as service.label for service in queryTypeValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.queryterm.$invalid}">
+			<label>Query Term</label>
+			<input required class="form-control" name="queryterm" ng-model="newFeed.QUERY_TERM" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.defaultstatus.$invalid}">
+			<label>Default Status</label>
+			<select required class="form-control" name="defaultstatus" ng-model="newFeed.DEFAULT_STATUS" ng-options="service.value as service.label for service in statusValues" />
+		</div>
+		<div class="form-group" ng-class="{'has-error': newFeedForm.$dirty && newFeedForm.order.$invalid}">
+			<label>Order</label>
+			<input required class="form-control" name="order" ng-model="newFeed.ORDER" />
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" ng-disabled="newFeedForm.$invalid"><span class="glyphicon glyphicon-ok"></span> Save</button>
+		</div>
+	</form>-->
+</div>
+</div>
+
+
+</div>

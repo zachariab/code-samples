@@ -1,0 +1,80 @@
+<div class="row">
+
+    <div id="adminNav"  class="affix">
+       <div>
+       <p id="publishAll"><button class="btn btn-primary" ng-click="publishAll()" ng-disabled="statusFilter != 'pending'">Publish All</button></p>
+      <h3>Filter by Status</h3>
+      <ul>
+        <li class="active"><a ng-class="{loading: loading &&  statusFilter=='pending', selected: statusFilter=='pending'}" href="#/posts/pending">Pending 
+        <span class="badge pull-right">{{stats.pending || 0}}</span></a>
+        </li>
+      <li><a ng-class="{loading: loading &&  statusFilter=='published', selected: statusFilter=='published'}" href="#/posts/published">Published 
+        <span class="badge pull-right">{{stats.published || 0}}</span></a></li>
+      <li><a ng-class="{loading: loading &&  statusFilter=='hidden', selected: statusFilter=='hidden'}" href="#/posts/hidden">Removed 
+        <span class="badge pull-right">{{stats.hidden || 0}}</span></a></li>
+        <li><a ng-class="{loading: loading &&  statusFilter=='blocked', selected: statusFilter=='blocked'}" href="#/posts/blocked">Blocked 
+          <span class="badge pull-right">{{stats.blocked || 0}}</span></a></li>
+      </ul>
+    </div>
+    </div>
+    <div class="postContainer">
+    <div ng-show="userMessage" class="alert alert-success" role="alert">{{userMessage}}</div>
+    <div id="hubposts" >
+
+<div ng-show="!(posts.length || loading)" class="hubpost noresults"><p><span>0</span> Posts</p></div>
+
+<div id="isoCont" isotope-container isotope-options="isoOptions">
+
+<div isotope-item ng-repeat="post in posts" ng-class="{warming: post.warming, popular: post.POST_PROPERTIES.starred, rejected: post.rejected}" data-post-type="{{post.TYPE}}" data-service="{{post.SERVICE}}" class="hubpost {{post.TYPE}}">
+
+
+    <div class="adminActions" ng-switch="post.STATUS">
+      <div ng-switch-when="pending">
+    	 <a class="publish" ng-class="{loading: post.loadingPublish}" ng-click="publishPost(post)"><span class="glyphicon glyphicon-ok"></span> Approve</a>
+    	 <a class="remove" ng-class="{loading: post.loadingRemove}" ng-click="rejectPost(post)"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+      </div>
+      <div ng-switch-when="published">
+       <a class="remove" ng-class="{loading: post.loadingRemove}" ng-click="rejectPost(post)"><span class="glyphicon glyphicon-remove"></span> Unpublish</a>
+      </div>
+      <div ng-switch-when="hidden">
+       <a class="publish" ng-class="{loading: post.loadingPublish}" ng-click="publishPost(post)"><span class="glyphicon glyphicon-ok"></span> Publish</a>
+      </div>
+      <div ng-switch-when="blocked">
+       <a class="publish" ng-class="{loading: post.loadingPublish}" ng-click="publishPost(post)"><span class="glyphicon glyphicon-ok"></span> Publish</a>
+      </div>
+    </div>
+
+    <span class="star-check" ng-class="{loading: post.starLoading}">
+          <input type="checkbox" ng-change="toggleStar(post)" ng-model="post.starred" name="rating" value="1" ng-checked="post.POST_PROPERTIES.starred"><i></i>
+	</span>
+	<div class="profile-container">
+			<img ng-src="{{post.POST_PROPERTIES.user_photo}}" ng-if="post.POST_PROPERTIES.user_photo" alt="Profile image" />
+        <h2 class="profile-name"><a href="user.cfm?id={{post.USER_ID}}&service={{post.SERVICE}}">{{post.POST_PROPERTIES.user_full_name}}</a></h2>
+        <p class="profile-username" ng-if="post.POST_PROPERTIES.user_screen_name">@{{post.POST_PROPERTIES.user_screen_name}}</p>
+    </div>
+	<div class="post-image-container" ng-if="post.POST_PROPERTIES.photo_url">
+         <img ng-src="{{post.POST_PROPERTIES.photo_url}}" alt="Post image" width="{{post.imgWidth}}" height="{{post.imgHeight}}" /> <!-- height="{{post.propImageHeight 300 POST_PROPERTIES.photo_height POST_PROPERTIES.photo_width}}"-->
+	</div>
+	<div class="post-text-content" ng-if="post.POST_PROPERTIES.photo_url">
+		<p class="post-image-caption">{{post.POST_PROPERTIES.text}}</p>
+	</div>
+	<div class="post-text-content" ng-if="!post.POST_PROPERTIES.photo_url">
+		<p class="post-text">{{post.POST_PROPERTIES.text}}</p>
+	</div>
+    <div class="post-footer">
+      <p class="post-status">
+        <span class="label label-success" ng-show="post.STATUS == 'published'">published <span ng-show="post.REVIEWED_BY">by {{post.REVIEWED_BY}}</span></span>
+        <span class="label label-warning" ng-show="post.STATUS == 'pending'">pending</span>
+        <span class="label label-default" ng-show="post.STATUS == 'hidden'">removed <span ng-show="post.REVIEWED_BY">by {{post.REVIEWED_BY}}</span></span>
+        <span class="label label-danger" ng-show="post.STATUS == 'blocked'">blocked</span>
+        <a class="label label-default details-btn" ng-click="postInfo(post)">details</a>
+      </p>
+
+		<p class="post-time"><a href="{{post.POST_URL}}" target="_blank">{{post.CREATED_AT | timeSince }} <img ng-src="/macsocial/admin/images/{{post.SERVICE}}.svg" alt="Twitter" /></a></p>
+    </div>
+</div>
+</div>
+</div>
+<div id="loadMore"><p><button ng-disabled="!beforeFilter" class="btn btn-default" ng-click="nextPage()">Load Older Posts</button></p></div>
+</div>
+</div>
